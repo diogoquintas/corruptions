@@ -6,7 +6,7 @@ export default function Home() {
   return (
     <div>
       <Head>
-        <title>Corruption(*s)</title>
+        <title>Corruption(s*)</title>
       </Head>
       <main>
         <ContractList />
