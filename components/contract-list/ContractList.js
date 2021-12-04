@@ -43,7 +43,15 @@ export default function ContractList() {
         />
         <ContractItem
           address="0xFEEDa52dc1c570533B68eFC9a6DaA2D212bCC836"
-          title="ReflectionsDataChannel (created by the Discord DAO)"
+          title="ReflectionsDataChannel (from the community)"
+        />
+        <ContractItem
+          address="0x06EB2100d66558CF8BCc3784420ad549D8D69bf6"
+          title="Reflections (from the community)"
+        />
+        <ContractItem
+          address="0x7572f8cC39266AEa2A29cAd3536C8f8904a599f8"
+          title="ReflectionsMetadata (from the community)"
         />
       </ul>
     </section>
