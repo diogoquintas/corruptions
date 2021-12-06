@@ -1,6 +1,6 @@
 import Head from "next/head";
-import ContractItem from "../components/contract-item/ContractItem";
 import ContractList from "../components/contract-list/ContractList";
+import Decoder from "../components/decoder/Decoder";
 
 export default function Home() {
   return (
@@ -10,6 +10,7 @@ export default function Home() {
       </Head>
       <main>
         <ContractList />
+        <Decoder />
       </main>
     </div>
   );
