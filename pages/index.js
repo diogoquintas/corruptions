@@ -1,6 +1,5 @@
 import Head from "next/head";
-import ContractList from "../components/contract-list/ContractList";
-import Decoder from "../components/decoder/Decoder";
+import corruption from "../corruption";
 
 export default function Home() {
   return (
@@ -9,8 +8,12 @@ export default function Home() {
         <title>Corruption(s*)</title>
       </Head>
       <main>
-        <ContractList />
-        <Decoder />
+        <img
+          style={{ marginTop: "10px" }}
+          width="320"
+          src={corruption}
+          alt=""
+        />
       </main>
     </div>
   );

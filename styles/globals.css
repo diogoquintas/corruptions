@@ -4,3 +4,11 @@ button {
   font-size: 16px;
   cursor: pointer;
 }
+
+* {
+  font-size: 24px;
+}
+
+a {
+  color: black;
+}

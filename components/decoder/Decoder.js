@@ -34,7 +34,7 @@ export default function Decoder() {
 
   return (
     <section>
-      <h3>cipher decoder</h3>
+      <h1>Enter the cipher</h1>
       <input
         type="text"
         value={input}
