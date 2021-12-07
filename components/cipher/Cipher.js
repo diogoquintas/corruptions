@@ -50,10 +50,10 @@ function Encoder() {
         onChange={(e) => setInput(e.target.value)}
       />
       <pre>
-        {input.replace(new RegExp(`[${allInverted}]`, "gi"), (m) => {
-          console.log(m);
-          return invertedChars[m.toUpperCase()];
-        })}
+        {input.replace(
+          new RegExp(`[${allInverted}]`, "gi"),
+          (m) => invertedChars[m.toUpperCase()]
+        )}
       </pre>
     </section>
   );
