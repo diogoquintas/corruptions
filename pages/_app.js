@@ -5,8 +5,6 @@ import "../styles/globals.css";
 function MyApp({ Component, pageProps }) {
   const { pathname } = useRouter();
 
-  console.log(pathname);
-
   return (
     <div>
       <nav style={{ display: "flex", gap: "10px" }}>
@@ -22,9 +20,9 @@ function MyApp({ Component, pageProps }) {
             contracts
           </a>
         </Link>
-        <Link href="/decoder">
-          <a style={{ color: pathname === "/decoder" ? "orangered" : "black" }}>
-            decoder
+        <Link href="/cipher">
+          <a style={{ color: pathname === "/cipher" ? "orangered" : "black" }}>
+            cipher
           </a>
         </Link>
       </nav>
