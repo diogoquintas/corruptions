@@ -9,7 +9,9 @@ export default function ContractItem({ title, address, description }) {
         {title}
       </a>
       {description && (
-        <button onClick={() => setOpen(!open)}>{`${open ? "-" : "+"}`}</button>
+        <button onClick={() => setOpen(!open)}>{`${
+          open ? "- info" : "+ info"
+        }`}</button>
       )}
       {description && open && <p>{description}</p>}
     </li>

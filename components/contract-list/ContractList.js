@@ -3,22 +3,22 @@ import ContractItem from "../contract-item/ContractItem";
 export default function ContractList() {
   return (
     <section>
-      <h3>from dom</h3>
+      <h3>dom</h3>
       <ul>
         <ContractItem
           title="Corruptions"
           address="0x5BDf397bB2912859Dbd8011F320a222f79A28d2E"
-          description="The main contract. The ERC-721 interface."
+          description="The main contract which contains the ERC-721 interface."
         />
         <ContractItem
           title="CorruptionsMetadata"
           address="0x2688212B769B693254D054f7E4b0d86E9462373b"
-          description="The contract that generates the token data + image for corruptions."
+          description="The contract that generates the metadata for each corruption or deviation."
         />
         <ContractItem
           title="CorruptionsDataMapper"
           address="0x7A96d95a787524a27a4df36b64a96910a2fDCF5B"
-          description="Additional information to each corruption, at the moment maps the tokenId with his deviation status."
+          description="Additional information related to each corruption. You can get information about the deviation status of your corruption here."
         />
         <ContractItem
           title="CorruptionsWiltedRoseDeviationWriter"
@@ -58,17 +58,17 @@ export default function ContractList() {
           address="0xdf8A48979F33f12952Ab4cF6f960EA4071fc656b"
         />
       </ul>
-      <h3>from the community</h3>
+      <h3>DAO</h3>
       <ul>
         <ContractItem
           address="0x06EB2100d66558CF8BCc3784420ad549D8D69bf6"
           title="Reflections"
-          description="NFT to fund the 8 deviations reserved for our multisig wallet."
+          description="NFT to fund the 8 deviations reserved for the DAO in the second deviation chapter."
         />
         <ContractItem
           address="0x86a103d80798A9202CbA0cEc9F499Cc24eA24FA5"
           title="ReflectionsMetadata"
-          description="The contract that generates the token data + image for reflections."
+          description="The contract that generates the token data + image for a reflection."
         />
         <ContractItem
           address="0xFEEDa52dc1c570533B68eFC9a6DaA2D212bCC836"
