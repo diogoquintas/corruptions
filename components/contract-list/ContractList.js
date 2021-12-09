@@ -57,6 +57,14 @@ export default function ContractList() {
           title="CorruptionsFont"
           address="0xdf8A48979F33f12952Ab4cF6f960EA4071fc656b"
         />
+        <ContractItem
+          title="CorruptionsBidirectionalDataMapper"
+          address="0x5E0813C763a56Cd5F5cEFe4883D80C275Cc873d8"
+        />
+        <ContractItem
+          title="CorruptionsAscensionMenes"
+          address="0xD5192Ba5Bd9415b5e0d09633657129086a5F36c4"
+        />
       </ul>
       <h3>DAO</h3>
       <ul>
