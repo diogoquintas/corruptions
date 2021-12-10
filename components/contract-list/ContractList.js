@@ -1,10 +1,26 @@
+import styled from "@emotion/styled";
 import ContractItem from "../contract-item/ContractItem";
+
+const Section = styled.section`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const Ul = styled.ul`
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
 
 export default function ContractList() {
   return (
-    <section>
+    <Section>
       <h3>dom</h3>
-      <ul>
+      <Ul>
         <ContractItem
           title="Corruptions"
           address="0x5BDf397bB2912859Dbd8011F320a222f79A28d2E"
@@ -23,7 +39,7 @@ export default function ContractList() {
         <ContractItem
           title="CorruptionsWiltedRoseDeviationWriter"
           address="0x4500f6e46D485B62eD35926052F04C04f627F637"
-          description="The first deviation chapter. The wilted rose, only 64 could deviate."
+          description="The first deviation chapter. The wilted rose, only 64 coUld deviate."
         />
         <ContractItem
           title="CorruptionsTemporalFragmentDeviationWriter"
@@ -65,9 +81,9 @@ export default function ContractList() {
           title="CorruptionsAscensionMenes"
           address="0xD5192Ba5Bd9415b5e0d09633657129086a5F36c4"
         />
-      </ul>
+      </Ul>
       <h3>DAO</h3>
-      <ul>
+      <Ul>
         <ContractItem
           address="0x06EB2100d66558CF8BCc3784420ad549D8D69bf6"
           title="Reflections"
@@ -83,7 +99,7 @@ export default function ContractList() {
           title="ReflectionsDataChannel"
           description="The portal created to talk with (*) and (s)."
         />
-      </ul>
-    </section>
+      </Ul>
+    </Section>
   );
 }

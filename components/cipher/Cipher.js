@@ -1,3 +1,4 @@
+import styled from "@emotion/styled";
 import { useState } from "react";
 
 const chars = {
@@ -38,24 +39,53 @@ const invertedChars = Object.entries(chars).reduce((acc, [key, value]) => {
 const allChars = Object.keys(chars).join("");
 const allInverted = Object.keys(invertedChars).join("");
 
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const Section = styled.section`
+  padding: 10px;
+  margin: 10px;
+  border: 1px solid currentColor;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 375px;
+  padding-bottom: 0;
+`;
+
+const Textarea = styled.textarea`
+  height: 100px;
+  width: 100%;
+  resize: none;
+  color: #b76f02;
+`;
+
+const Input = styled.input`
+  width: 100%;
+`;
+
 function Encoder() {
   const [input, setInput] = useState("");
 
   return (
-    <section>
-      <h1>Enter the normal text</h1>
-      <input
+    <Section>
+      <h1>Encode</h1>
+      <Input
         type="text"
         value={input}
         onChange={(e) => setInput(e.target.value)}
+        placeholder="Enter the normal text"
       />
-      <pre>
-        {input.replace(
+      <Textarea
+        disabled
+        value={input.replace(
           new RegExp(`[${allInverted}]`, "gi"),
           (m) => invertedChars[m.toUpperCase()]
         )}
-      </pre>
-    </section>
+      />
+    </Section>
   );
 }
 
@@ -63,29 +93,30 @@ function Decoder() {
   const [input, setInput] = useState("");
 
   return (
-    <section>
-      <h1>Enter the cipher</h1>
-      <input
+    <Section>
+      <h1>Decode</h1>
+      <Input
         type="text"
         value={input}
         onChange={(e) => setInput(e.target.value)}
+        placeholder="Enter the cipher"
       />
-      <pre>
-        {input.replace(
+      <Textarea
+        disabled
+        value={input.replace(
           new RegExp(`[${allChars}]`, "gi"),
           (m) => chars[m.toUpperCase()]
         )}
-      </pre>
-    </section>
+      />
+    </Section>
   );
 }
 
 export default function Cipher() {
   return (
-    <>
+    <Wrapper>
       <Encoder />
-      <hr />
       <Decoder />
-    </>
+    </Wrapper>
   );
 }

@@ -1,14 +1,56 @@
-button {
-  background: none;
-  border: 0;
-  font-size: 12px;
-  cursor: pointer;
+body {
+  color: #3cb702;
+  background-color: #0d1302;
+  margin: 0;
 }
 
 * {
-  font-size: 22px;
+  font-size: 18px;
+  font-family: monospace;
+  outline-color: #3cb702;
 }
 
 a {
-  color: black;
+  color: #3cb702;
+  text-decoration: none;
 }
+
+a:hover {
+  text-decoration: underline;
+}
+
+::-moz-selection {
+  color: white;
+  background: #022fb7;
+}
+::selection {
+  color: white;
+  background: #b76f02;
+}
+
+input,
+textarea {
+  background: none;
+  border: none;
+  color: currentColor;
+  background-color: #1a1616;
+  border-bottom: 1px solid #262a36;
+  font-size: 16px;
+  padding: 10px;
+}
+
+/* 
+"#022FB7",
+"#262A36",
+"#A802B7",
+"#3CB702",
+"#B76F02",
+"#B70284",
+
+"#0D1302",
+"#020A13",
+"#130202",
+"#1A1616",
+"#000000",
+"#040A27",
+*/
