@@ -28,7 +28,7 @@ export default function ContractList() {
         />
         <ContractItem
           title="CorruptionsMetadata"
-          address="0x2688212B769B693254D054f7E4b0d86E9462373b"
+          address="0x95bdEc5B5249f217ac9e0D30AEDbDD479611A00b"
           description="The contract that generates the metadata for each corruption or deviation."
         />
         <ContractItem
