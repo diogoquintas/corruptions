@@ -54,7 +54,7 @@ export default function ContractList() {
         <ContractItem
           title="CorruptionsDataChannel"
           address="0x90Ccc00699222A9870DbCFb980512a6eA40edB6F"
-          description="The portal that receives messages from (*) and (s)."
+          description="The portal that receives messages from dom/demons."
         />
         <ContractItem
           title="CorruptionsStrangeApparatus"
@@ -87,7 +87,7 @@ export default function ContractList() {
         <ContractItem
           address="0x06EB2100d66558CF8BCc3784420ad549D8D69bf6"
           title="Reflections"
-          description="NFT to fund the 8 deviations reserved for the DAO in the second deviation chapter."
+          description="NFT to fund the 8 deviations reserved for the DAO in the second deviation (CorruptionsTemporalFragmentDeviationWriter)."
         />
         <ContractItem
           address="0x86a103d80798A9202CbA0cEc9F499Cc24eA24FA5"
@@ -97,7 +97,7 @@ export default function ContractList() {
         <ContractItem
           address="0xFEEDa52dc1c570533B68eFC9a6DaA2D212bCC836"
           title="ReflectionsDataChannel"
-          description="The portal created to talk with (*) and (s)."
+          description="The portal created to talk with dom/demons."
         />
       </Ul>
     </Section>
