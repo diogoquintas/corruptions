@@ -39,12 +39,12 @@ export default function ContractList() {
         <ContractItem
           title="CorruptionsWiltedRoseDeviationWriter"
           address="0x4500f6e46D485B62eD35926052F04C04f627F637"
-          description="The first deviation chapter. The wilted rose, only 64 coUld deviate."
+          description="The first deviation. The wilted rose, only 64 could deviate."
         />
         <ContractItem
           title="CorruptionsTemporalFragmentDeviationWriter"
           address="0x6a00bC9eD4DcE14ed7bA72D01da6ed4746C5792e"
-          description="The second deviation chapter. Contains 8 different deviations."
+          description="The second deviation. Contains 8 different art works/concepts/history pieces."
         />
         <ContractItem
           title="CorruptionsDeviationRegistry"
