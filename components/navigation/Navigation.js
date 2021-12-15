@@ -4,7 +4,7 @@ import styled from "@emotion/styled";
 
 const Nav = styled.nav`
   display: flex;
-  gap: 10px;
+  gap: 50px;
   margin: 0 auto;
   padding: 10px;
 `;
@@ -20,14 +20,17 @@ export default function Navigation() {
 
   return (
     <Nav>
-      <Link href="/">
+      <Link href="/" passHref>
         <A selected={pathname === "/"}>home</A>
       </Link>
-      <Link href="/contracts">
+      <Link href="/contracts" passHref>
         <A selected={pathname === "/contracts"}>contracts</A>
       </Link>
-      <Link href="/cipher">
+      <Link href="/cipher" passHref>
         <A selected={pathname === "/cipher"}>cipher</A>
+      </Link>
+      <Link href="/timeline" passHref>
+        <A selected={pathname === "/timeline"}>temporal fragment puzzle</A>
       </Link>
     </Nav>
   );
