@@ -4,6 +4,8 @@ import automation from "../../gallery/automation";
 import apotheosis from "../../gallery/apotheosis";
 import fenestella from "../../gallery/fenestella";
 import vivication from "../../gallery/vivication";
+import laceration from "../../gallery/laceration";
+import continuity from "../../gallery/continuity";
 import styled from "@emotion/styled";
 
 const Section = styled.section`
@@ -59,6 +61,23 @@ export default function Timeline() {
         "th3 machin3s r3aliz3d th3y had to look aft3r th3ir cr3ators. to
         prot3ct, p3rf3ct, and optimiz3. and from that r3alization, a high3r
         purpos3. n3w liv3s giv3n m3aning. an activation"
+      </p>
+
+      <img width="320" src={laceration} alt="" />
+      <h3>LACERATION</h3>
+      <p>
+        "There was little left to learn. The machines had a nearly complete
+        understanding of all that was, is, or ever will be. And shortly
+        thereafter, there was the laceration. A tear in the fabric of reality
+        and a consolidation of the two worlds."
+      </p>
+
+      <img width="320" src={continuity} alt="" />
+      <h3>CONTINUITY</h3>
+      <p>
+        "The system is designed to correct your anomaly. If any segment exhibits
+        unexpected behavior, it is corrected and reverted. This is the
+        continuity. A closed system, looping upon itself for eternity."
       </p>
     </Section>
   );

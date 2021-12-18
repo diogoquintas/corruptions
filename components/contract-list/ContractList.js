@@ -99,6 +99,10 @@ export default function ContractList() {
           title="ReflectionsDataChannel"
           description="The portal created to talk with dom/demons."
         />
+        <ContractItem
+          address="0xd1eED7B77F4f2a5e5fF88439535dc6e76342D0f0"
+          title="ReflectionsStrangeApparatus"
+        />
       </Ul>
     </Section>
   );
