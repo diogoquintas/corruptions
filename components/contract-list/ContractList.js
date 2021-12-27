@@ -81,6 +81,10 @@ export default function ContractList() {
           title="CorruptionsAscensionMenes"
           address="0xD5192Ba5Bd9415b5e0d09633657129086a5F36c4"
         />
+        <ContractItem
+          title="CorruptionsFAQ"
+          address="0x00cA1ef843e8503e9422DD2c0142a37D7aDFc996"
+        />
       </Ul>
       <h3>DAO</h3>
       <Ul>
