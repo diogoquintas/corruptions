@@ -45,9 +45,6 @@ const Wrapper = styled.div`
 `;
 
 const Section = styled.section`
-  padding: 10px;
-  margin: 10px;
-  border: 1px solid currentColor;
   display: flex;
   flex-direction: column;
   align-items: center;

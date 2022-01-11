@@ -44,7 +44,7 @@ export default function ContractList() {
         <ContractItem
           title="CorruptionsTemporalFragmentDeviationWriter"
           address="0x6a00bC9eD4DcE14ed7bA72D01da6ed4746C5792e"
-          description="The second deviation. Contains 8 different art works/concepts/history pieces."
+          description="The second deviation. Contains 8 different art works/concepts/history pieces that were used after to build chapter 1 timeline."
         />
         <ContractItem
           title="CorruptionsDeviationRegistry"

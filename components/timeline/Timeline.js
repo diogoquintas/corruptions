@@ -10,9 +10,15 @@ import styled from "@emotion/styled";
 
 const Section = styled.section`
   text-align: center;
+  margin-bottom: 5rem;
 
   & > img {
     margin-top: 100px;
+  }
+
+  & > p {
+    max-width: 375px;
+    margin: 0 auto;
   }
 `;
 
