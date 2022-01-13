@@ -61,23 +61,10 @@ export function ChainContextProvider(props) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [connected]);
 
-  const connect = useCallback(async () => {
-    if (isMobileBrowser()) {
-      window.open(process.env.NEXT_PUBLIC_METAMASK_DEEP_LINK, "_blank").focus();
-      return;
-    }
-
-    setConnecting(true);
-
-    const provider = window.ethereum;
-
-    if (!provider) {
-      throw new Error(
-        "No provider found, check if you have a wallet installed"
-      );
-    }
-
+  const handleEthereum = useCallback(async () => {
     try {
+      const provider = window.ethereum;
+
       await provider.enable();
 
       const web3Provider = new Web3(provider);
@@ -122,12 +109,56 @@ export function ChainContextProvider(props) {
 
       setReflectionsDataChannel(reflectionsDataChannel);
     } catch (err) {
-      alert("It was not possible to connect to your wallet");
+      alert(
+        "It was not possible to connect to your wallet, check if you have metamask installed"
+      );
       console.log("Error details", err);
     }
-
-    setConnecting(false);
   }, []);
+
+  const connect = useCallback(async () => {
+    setConnecting(true);
+
+    const provider = window.ethereum;
+
+    if (provider) {
+      await handleEthereum();
+
+      setConnecting(false);
+    } else {
+      const timeout = setTimeout(async () => {
+        if (window.ethereum) {
+          await handleEthereum();
+        } else if (isMobileBrowser()) {
+          window
+            .open(process.env.NEXT_PUBLIC_METAMASK_DEEP_LINK, "_blank")
+            .focus();
+
+          return;
+        }
+
+        setConnecting(false);
+      }, 3000);
+
+      const handleEthereumInitialized = async () => {
+        if (timeout) {
+          clearTimeout(timeout);
+        }
+
+        await handleEthereum();
+
+        setConnecting(false);
+      };
+
+      window.addEventListener(
+        "ethereum#initialized",
+        handleEthereumInitialized,
+        {
+          once: true,
+        }
+      );
+    }
+  }, [handleEthereum]);
 
   const setMessage = useCallback(
     ({ hash, message, timestamp }) =>
