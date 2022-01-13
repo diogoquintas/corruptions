@@ -1,102 +1,20 @@
-import { css } from "@emotion/react";
-import styled from "@emotion/styled";
 import { Base64 } from "js-base64";
 import { useMemo, useRef, useState } from "react";
 import useChainData from "../../hooks/useChainData";
 import useIntersectionObserver from "../../hooks/useIntersectionObserver";
 import useMessage from "../../hooks/useMessage";
-
-const Section = styled.section`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
-
-const MessageContent = styled.div`
-  margin-top: 0.2rem;
-  word-spacing: 0.2rem;
-  line-height: 1.4;
-  font-weight: bold;
-
-  ${({ hasMessage }) =>
-    !hasMessage &&
-    css`
-      min-height: 6rem;
-    `}
-`;
-
-const From = styled.span`
-  font-size: 0.9rem;
-`;
-
-const List = styled.ul`
-  margin: 0;
-  padding: 1rem;
-  max-width: calc(100vw - 2rem);
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-`;
-
-const MessageBlock = styled.li`
-  margin: 0;
-  padding: 0;
-  max-width: 50rem;
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 2rem;
-  font-size: 1.4rem;
-  word-break: break-word;
-  color: var(--main-green);
-
-  ${({ isCorruptionsDataChannel }) =>
-    !isCorruptionsDataChannel &&
-    css`
-      color: var(--inverted);
-    `};
-`;
-
-const Pre = styled.pre`
-  color: currentColor;
-  font-weight: bold;
-  white-space: normal;
-  word-break: break-word;
-  padding: 0.2rem;
-  margin: 0;
-  border-left: 0.3rem solid currentColor;
-`;
-
-const Img = styled.img`
-  padding: 0.5rem;
-  width: calc(100% - 1rem);
-`;
-
-const MessageHeading = styled.div`
-  display: flex;
-  justify-content: space-between;
-`;
-
-const DateInfo = styled.a`
-  font-size: 0.8rem;
-  text-decoration: underline;
-  cursor: pointer;
-  color: currentColor;
-
-  &:hover {
-    filter: brightness(1.8);
-    color: currentColor;
-  }
-`;
-
-const Select = styled.select`
-  background: none;
-  border: 0;
-  color: var(--main-green);
-  margin-left: auto;
-  position: sticky;
-  top: 2rem;
-  background: var(--default-background);
-`;
+import {
+  Section,
+  MessageBlock,
+  MessageContent,
+  Pre,
+  Img,
+  From,
+  List,
+  MessageHeading,
+  DateInfo,
+  Select,
+} from "./DataChanel.styles";
 
 const BASE_64_REGEX = /^[-A-Za-z0-9+/]*={0,3}$/;
 
@@ -125,7 +43,8 @@ function Message({ hash }) {
       const isBase64 =
         BASE_64_REGEX.test(string) &&
         Base64.isValid(string) &&
-        string.length > 0;
+        string.length > 0 &&
+        string.length % 2 === 0;
 
       if (isBase64) {
         const parsed = Base64.decode(string);

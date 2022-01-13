@@ -39,30 +39,36 @@ a {
 a:hover {
   text-decoration: none;
   color: var(--accent-green);
+  text-shadow: -0.06em 0 red, 0.06em 0 cyan;
 }
 
 a:hover * {
   text-decoration: none;
   color: var(--accent-green);
+  text-shadow: -0.06em 0 red, 0.06em 0 cyan;
 }
 
 button:hover {
   background: var(--accent-green);
   color: var(--default-background);
+  text-shadow: -0.06em 0 red, 0.06em 0 cyan;
 }
 
 button:hover * {
   background: var(--accent-green);
   color: var(--default-background);
+  text-shadow: -0.06em 0 red, 0.06em 0 cyan;
 }
 
 ::-moz-selection {
   color: white;
   background: var(--purple);
+  text-shadow: -0.06em 0 red, 0.06em 0 cyan;
 }
 ::selection {
   color: white;
   background: var(--purple);
+  text-shadow: -0.06em 0 red, 0.06em 0 cyan;
 }
 
 input,

@@ -9,9 +9,7 @@ const Button = styled.button`
   border: none;
   color: var(--main-green);
   cursor: pointer;
-
-  &:hover {
-  }
+  background-color: var(--default-background);
 `;
 
 export default function BackToTop() {

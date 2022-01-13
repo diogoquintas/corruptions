@@ -23,7 +23,7 @@ const Nav = styled.nav`
   width: 100%;
   height: 100%;
   z-index: 800;
-  background: var(--default-background);
+  background: #020a13;
   display: flex;
   flex-direction: column;
   align-items: center;
