@@ -26,6 +26,7 @@ export function ChainContextProvider(props) {
   const [reflectionsDataChannel, setReflectionsDataChannel] = useState();
   const [connecting, setConnecting] = useState(false);
   const [messages, setMessages] = useState([]);
+  const [sortAsc, setSortAsc] = useState(false);
 
   const connected =
     !!provider && !!account && !!dataChannel && !!reflectionsDataChannel;
@@ -177,9 +178,14 @@ export function ChainContextProvider(props) {
   }, []);
 
   const sortedMessages = useMemo(
-    () => messages.sort((a, b) => b.blockNumber - a.blockNumber),
-    [messages]
+    () =>
+      messages.sort((a, b) =>
+        sortAsc ? a.blockNumber - b.blockNumber : b.blockNumber - a.blockNumber
+      ),
+    [messages, sortAsc]
   );
+
+  const toggleSort = useCallback(() => setSortAsc((sort) => !sort), []);
 
   const context = useMemo(
     () => ({
@@ -188,7 +194,8 @@ export function ChainContextProvider(props) {
       connected,
       connecting,
       messages: sortedMessages,
-      actions: { connect, reset, setMessage },
+      sortAsc,
+      actions: { connect, reset, setMessage, toggleSort },
     }),
     [
       account,
@@ -199,6 +206,8 @@ export function ChainContextProvider(props) {
       sortedMessages,
       connected,
       setMessage,
+      toggleSort,
+      sortAsc,
     ]
   );
 

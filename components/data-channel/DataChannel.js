@@ -13,7 +13,10 @@ const Section = styled.section`
 `;
 
 const MessageContent = styled.div`
-  margin: 0;
+  margin-top: 0.2rem;
+  word-spacing: 0.2rem;
+  line-height: 1.4;
+  font-weight: bold;
 
   ${({ hasMessage }) =>
     !hasMessage &&
@@ -22,10 +25,8 @@ const MessageContent = styled.div`
     `}
 `;
 
-const From = styled.b`
-  font-size: 0.8rem;
-  color: ${({ isCorruptionsDataChannel }) =>
-    isCorruptionsDataChannel ? "#B76F02" : "#B70284"};
+const From = styled.span`
+  font-size: 0.9rem;
 `;
 
 const List = styled.ul`
@@ -44,16 +45,25 @@ const MessageBlock = styled.li`
   display: flex;
   flex-direction: column;
   margin-bottom: 2rem;
-  font-size: 1rem;
+  font-size: 1.4rem;
   word-break: break-word;
+  color: var(--main-green);
+
+  ${({ isCorruptionsDataChannel }) =>
+    !isCorruptionsDataChannel &&
+    css`
+      color: var(--inverted);
+    `};
 `;
 
 const Pre = styled.pre`
-  color: #61e721;
+  color: currentColor;
+  font-weight: bold;
   white-space: normal;
   word-break: break-word;
-  padding: 0.5rem;
+  padding: 0.2rem;
   margin: 0;
+  border-left: 0.3rem solid currentColor;
 `;
 
 const Img = styled.img`
@@ -67,18 +77,28 @@ const MessageHeading = styled.div`
 `;
 
 const DateInfo = styled.a`
-  font-size: 0.7rem;
-  color: #40a500;
+  font-size: 0.8rem;
   text-decoration: underline;
   cursor: pointer;
+  color: currentColor;
 
   &:hover {
-    color: #52ff00;
+    filter: brightness(1.8);
+    color: currentColor;
   }
 `;
 
-const BASE_64_REGEX =
-  /^(?:[A-Za-z\d+/]{4})*(?:[A-Za-z\d+/]{3}=|[A-Za-z\d+/]{2}==)?$/;
+const Select = styled.select`
+  background: none;
+  border: 0;
+  color: var(--main-green);
+  margin-left: auto;
+  position: sticky;
+  top: 2rem;
+  background: var(--default-background);
+`;
+
+const BASE_64_REGEX = /^[-A-Za-z0-9+/]*={0,3}$/;
 
 function Message({ hash }) {
   const elementRef = useRef();
@@ -99,13 +119,17 @@ function Message({ hash }) {
   const parsedMessage = useMemo(() => {
     if (!message) return;
 
-    const splitted = message.split(/([^ ]{20,})/);
+    const splitted = message.split(/([^ ]{10,})/);
 
     return splitted.map((string, index) => {
-      const isBase64 = BASE_64_REGEX.test(string) && Base64.isValid(string);
+      const isBase64 =
+        BASE_64_REGEX.test(string) &&
+        Base64.isValid(string) &&
+        string.length > 0;
 
       if (isBase64) {
         const parsed = Base64.decode(string);
+        const hasInvalidCharacters = /[^\x00-\x7F]+/.test(parsed);
 
         if (/png/i.test(parsed)) {
           return (
@@ -117,6 +141,8 @@ function Message({ hash }) {
           );
         }
 
+        if (hasInvalidCharacters) return string;
+
         return <Pre key={index}>{parsed}</Pre>;
       }
 
@@ -125,11 +151,9 @@ function Message({ hash }) {
   }, [message]);
 
   return (
-    <MessageBlock>
+    <MessageBlock isCorruptionsDataChannel={from === "CorruptionsDataChannel"}>
       <MessageHeading>
-        <From isCorruptionsDataChannel={from === "CorruptionsDataChannel"}>
-          {from}
-        </From>
+        <From>{from}</From>
         {timestamp && (
           <DateInfo target="_blank" href={`https://etherscan.io/tx/${hash}`}>
             {new Date(timestamp * 1000).toLocaleString()}
@@ -144,11 +168,27 @@ function Message({ hash }) {
 }
 
 export default function DataChannel() {
-  const { connected, messages } = useChainData();
+  const {
+    connected,
+    messages,
+    sortAsc,
+    actions: { toggleSort },
+  } = useChainData();
+
+  const sort = sortAsc ? "oldest" : "newest";
 
   return (
     <Section>
       <h3>Messages</h3>
+      {connected && messages.length > 0 && (
+        <Select
+          value={sort}
+          onChange={(evt) => evt.target.value !== sort && toggleSort()}
+        >
+          <option value="newest">Newest</option>
+          <option value="oldest">Oldest</option>
+        </Select>
+      )}
       {connected ? (
         messages.length > 0 ? (
           <List>

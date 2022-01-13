@@ -9,27 +9,27 @@ const Wrapper = styled.div`
 `;
 
 const Button = styled.button`
-  color: #3cb702;
-  background: #0d1302;
+  color: var(--main-green);
+  background: var(--default-background);
   border: 0;
   cursor: pointer;
 
   &:hover:disabled {
-    background-color: #0d1302;
+    background-color: var(--default-background);
     cursor: not-allowed;
-    color: #3cb702;
+    color: var(--main-green);
   }
 `;
 
 const LogoutButton = styled.button`
-  color: #3cb702;
-  background: #0d1302;
+  color: var(--main-green);
+  background: var(--default-background);
   border: 0;
   cursor: pointer;
 
   &:hover {
-    color: #3cb702;
-    background: #0d1302;
+    color: var(--main-green);
+    background: var(--default-background);
     text-decoration: line-through;
   }
 `;

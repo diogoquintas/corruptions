@@ -4,6 +4,7 @@ import Navigation from "../components/navigation/Navigation";
 import styled from "@emotion/styled";
 import Connecter from "../components/connecter/Connecter";
 import { ChainContextProvider } from "../hooks/useChainData";
+import BackToTop from "../components/back-to-top/BackToTop";
 
 const Wrapper = styled.div`
   display: flex;
@@ -55,6 +56,7 @@ function MyApp({ Component, pageProps }) {
           </Main>
           <Connecter />
         </Wrapper>
+        <BackToTop />
       </ChainContextProvider>
     </div>
   );

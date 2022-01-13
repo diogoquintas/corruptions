@@ -1,4 +1,3 @@
-import { Base64 } from "js-base64";
 import { useEffect, useMemo, useState } from "react";
 import useChainData from "./useChainData";
 
@@ -29,7 +28,7 @@ export default function useMessage({ hash, load = false }) {
                 "string",
                 `0x${transaction.input.slice(10)}`
               )
-            : "[function()]";
+            : "[internal function]";
 
         setMessage({ message, hash, timestamp: block.timestamp });
       } catch (err) {

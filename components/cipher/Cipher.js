@@ -56,7 +56,7 @@ const Textarea = styled.textarea`
   height: 100px;
   width: 100%;
   resize: none;
-  color: #b76f02;
+  color: var(--selection-brown);
 `;
 
 const Input = styled.input`

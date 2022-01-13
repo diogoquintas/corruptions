@@ -9,8 +9,8 @@ const Button = styled.button`
   position: fixed;
   top: 0.5rem;
   left: 0.5rem;
-  color: #0d1302;
-  background: #3cb702;
+  color: var(--default-background);
+  background: var(--main-green);
   border: 0;
   z-index: 900;
   cursor: pointer;
@@ -23,7 +23,7 @@ const Nav = styled.nav`
   width: 100%;
   height: 100%;
   z-index: 800;
-  background: #0d1302;
+  background: var(--default-background);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -32,12 +32,13 @@ const Nav = styled.nav`
 `;
 
 const A = styled.a`
-  color: ${({ selected }) => (selected ? "currentColor" : "#B76F02")};
+  color: ${({ selected }) =>
+    selected ? "currentColor" : "var(--selection-brown)"};
   text-decoration: none;
   cursor: pointer;
 
   & > svg {
-    color: #b76f02;
+    color: var(--main-green);
     width: 21px;
     height: 21px;
   }

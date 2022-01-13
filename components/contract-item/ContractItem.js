@@ -25,7 +25,7 @@ const Description = styled.p`
   font-size: 14px;
   text-align: center;
   max-width: 500px;
-  color: #b76f02;
+  color: var(--selection-brown);
 `;
 
 export default function ContractItem({ title, address, description }) {
