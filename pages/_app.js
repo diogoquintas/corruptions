@@ -2,6 +2,8 @@ import Head from "next/head";
 import "../styles/globals.css";
 import Navigation from "../components/navigation/Navigation";
 import styled from "@emotion/styled";
+import Connecter from "../components/connecter/Connecter";
+import { ChainContextProvider } from "../hooks/useChainData";
 
 const Wrapper = styled.div`
   display: flex;
@@ -25,12 +27,15 @@ function MyApp({ Component, pageProps }) {
       <Head>
         <title>Corruption(s*)</title>
       </Head>
-      <Wrapper>
-        <Navigation />
-        <Main>
-          <Component {...pageProps} />
-        </Main>
-      </Wrapper>
+      <ChainContextProvider>
+        <Wrapper>
+          <Navigation />
+          <Main>
+            <Component {...pageProps} />
+          </Main>
+          <Connecter />
+        </Wrapper>
+      </ChainContextProvider>
     </div>
   );
 }

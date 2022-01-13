@@ -1,5 +1,5 @@
 import ContractList from "../components/contract-list/ContractList";
 
-export default function () {
+export default function ContractsPage() {
   return <ContractList />;
 }

@@ -3,23 +3,38 @@ import { useRouter } from "next/dist/client/router";
 import styled from "@emotion/styled";
 import OpenSea from "./OpenSea";
 import Discord from "./Discord";
+import { useState } from "react";
+
+const Button = styled.button`
+  position: fixed;
+  top: 0.5rem;
+  left: 0.5rem;
+  color: #0d1302;
+  background: #3cb702;
+  border: 0;
+  z-index: 900;
+  cursor: pointer;
+`;
 
 const Nav = styled.nav`
-  display: flex;
-  flex-wrap: wrap;
-  gap: 50px;
-  margin: 0 auto;
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 800;
   background: #0d1302;
-  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
 `;
 
 const A = styled.a`
   color: ${({ selected }) => (selected ? "currentColor" : "#B76F02")};
   text-decoration: none;
   cursor: pointer;
-  margin: 0 auto;
 
   & > svg {
     color: #b76f02;
@@ -34,27 +49,59 @@ const FixedNav = styled.div`
   right: 0.5rem;
   display: flex;
   gap: 0.5rem;
+  z-index: 900;
 `;
 
 export default function Navigation() {
   const { pathname } = useRouter();
+  const [isOpen, setIsOpen] = useState();
 
   return (
     <>
-      <Nav>
-        <Link href="/" passHref>
-          <A selected={pathname === "/"}>home</A>
-        </Link>
-        <Link href="/contracts" passHref>
-          <A selected={pathname === "/contracts"}>contracts</A>
-        </Link>
-        <Link href="/cipher" passHref>
-          <A selected={pathname === "/cipher"}>cipher</A>
-        </Link>
-        <Link href="/timeline" passHref>
-          <A selected={pathname === "/timeline"}>timeline</A>
-        </Link>
-      </Nav>
+      <Button onClick={() => setIsOpen(!isOpen)}>
+        {isOpen ? "Close" : "Menu"}
+      </Button>
+      {isOpen && (
+        <Nav>
+          <Link href="/" passHref>
+            <A onClick={() => setIsOpen(false)} selected={pathname === "/"}>
+              home
+            </A>
+          </Link>
+          <Link href="/contracts" passHref>
+            <A
+              onClick={() => setIsOpen(false)}
+              selected={pathname === "/contracts"}
+            >
+              contracts
+            </A>
+          </Link>
+          <Link href="/cipher" passHref>
+            <A
+              onClick={() => setIsOpen(false)}
+              selected={pathname === "/cipher"}
+            >
+              cipher
+            </A>
+          </Link>
+          <Link href="/timeline" passHref>
+            <A
+              onClick={() => setIsOpen(false)}
+              selected={pathname === "/timeline"}
+            >
+              timeline
+            </A>
+          </Link>
+          <Link href="/data-channel" passHref>
+            <A
+              onClick={() => setIsOpen(false)}
+              selected={pathname === "/data-channel"}
+            >
+              data channel
+            </A>
+          </Link>
+        </Nav>
+      )}
       <FixedNav>
         <Link
           aria-label="Community discord"

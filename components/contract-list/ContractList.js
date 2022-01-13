@@ -53,7 +53,7 @@ export default function ContractList() {
         />
         <ContractItem
           title="CorruptionsDataChannel"
-          address="0x90Ccc00699222A9870DbCFb980512a6eA40edB6F"
+          address={process.env.NEXT_PUBLIC_DATA_CHANNEL_ADDRESS}
           description="The portal that receives messages from dom/demons."
         />
         <ContractItem

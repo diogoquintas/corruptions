@@ -6,6 +6,10 @@ const Li = styled.li`
   flex-direction: column;
   align-items: center;
   margin-bottom: 10px;
+
+  & a {
+    font-size: 14px;
+  }
 `;
 
 const Button = styled.button`
@@ -14,10 +18,11 @@ const Button = styled.button`
   font-size: 12px;
   cursor: pointer;
   color: currentColor;
+  margin-left: 0.5rem;
 `;
 
 const Description = styled.p`
-  font-size: 16px;
+  font-size: 14px;
   text-align: center;
   max-width: 500px;
   color: #b76f02;
@@ -29,7 +34,11 @@ export default function ContractItem({ title, address, description }) {
   return (
     <Li key={address}>
       <div>
-        <a target="_blank" href={`https://etherscan.io/address/${address}`}>
+        <a
+          target="_blank"
+          href={`https://etherscan.io/address/${address}`}
+          rel="noreferrer"
+        >
           {title}
         </a>
         {description && (
