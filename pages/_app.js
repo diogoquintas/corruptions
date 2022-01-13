@@ -1,4 +1,5 @@
 import Head from "next/head";
+import "../styles/fonts/fonts.css";
 import "../styles/globals.css";
 import Navigation from "../components/navigation/Navigation";
 import styled from "@emotion/styled";
