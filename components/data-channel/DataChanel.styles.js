@@ -5,6 +5,7 @@ export const Section = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin: 5rem 0;
 `;
 
 export const MessageContent = styled.div`
@@ -49,6 +50,10 @@ export const MessageBlock = styled.li`
     css`
       color: var(--inverted);
     `};
+
+  &:last-of-type {
+    margin-bottom: 0;
+  }
 `;
 
 export const Pre = styled.pre`

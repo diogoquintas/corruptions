@@ -64,33 +64,12 @@ export default function Navigation() {
       </Button>
       {isOpen && (
         <Nav>
-          <Link href="/" passHref>
-            <A onClick={() => setIsOpen(false)} selected={pathname === "/"}>
-              home
-            </A>
-          </Link>
-          <Link href="/contracts" passHref>
+          <Link href="/about" passHref>
             <A
               onClick={() => setIsOpen(false)}
-              selected={pathname === "/contracts"}
+              selected={pathname === "/about"}
             >
-              contracts
-            </A>
-          </Link>
-          <Link href="/cipher" passHref>
-            <A
-              onClick={() => setIsOpen(false)}
-              selected={pathname === "/cipher"}
-            >
-              cipher
-            </A>
-          </Link>
-          <Link href="/timeline" passHref>
-            <A
-              onClick={() => setIsOpen(false)}
-              selected={pathname === "/timeline"}
-            >
-              timeline
+              What is Corruption(s*)?
             </A>
           </Link>
           <Link href="/data-channel" passHref>
@@ -98,7 +77,36 @@ export default function Navigation() {
               onClick={() => setIsOpen(false)}
               selected={pathname === "/data-channel"}
             >
-              data channel
+              Data Channel
+            </A>
+          </Link>
+          <Link href="/timeline" passHref>
+            <A
+              onClick={() => setIsOpen(false)}
+              selected={pathname === "/timeline"}
+            >
+              Timeline
+            </A>
+          </Link>
+          <Link href="/contracts" passHref>
+            <A
+              onClick={() => setIsOpen(false)}
+              selected={pathname === "/contracts"}
+            >
+              Contracts
+            </A>
+          </Link>
+          <Link href="/cipher" passHref>
+            <A
+              onClick={() => setIsOpen(false)}
+              selected={pathname === "/cipher"}
+            >
+              Cipher
+            </A>
+          </Link>
+          <Link href="/faq" passHref>
+            <A onClick={() => setIsOpen(false)} selected={pathname === "/faq"}>
+              FAQ
             </A>
           </Link>
         </Nav>
@@ -110,12 +118,17 @@ export default function Navigation() {
           href="https://discord.gg/MUegeTGwQa"
           passHref
         >
-          <A target="_blank">
+          <A target="_blank" rel="noreferrer">
             <Discord />
           </A>
         </Link>
         <Link href="https://opensea.io/collection/corruption-s" passHref>
-          <A aria-label="Collection" title="Collection" target="_blank">
+          <A
+            aria-label="Collection"
+            title="Collection"
+            target="_blank"
+            rel="noreferrer"
+          >
             <OpenSea />
           </A>
         </Link>

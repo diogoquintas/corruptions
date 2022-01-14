@@ -10,7 +10,7 @@ import styled from "@emotion/styled";
 
 const Section = styled.section`
   text-align: center;
-  margin-bottom: 5rem;
+  margin: 5rem 0;
 
   & > img {
     margin-top: 100px;

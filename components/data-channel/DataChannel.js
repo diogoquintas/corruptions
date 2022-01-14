@@ -74,7 +74,11 @@ function Message({ hash }) {
       <MessageHeading>
         <From>{from}</From>
         {timestamp && (
-          <DateInfo target="_blank" href={`https://etherscan.io/tx/${hash}`}>
+          <DateInfo
+            target="_blank"
+            href={`https://etherscan.io/tx/${hash}`}
+            rel="noreferrer"
+          >
             {new Date(timestamp * 1000).toLocaleString()}
           </DateInfo>
         )}
