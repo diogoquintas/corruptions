@@ -135,6 +135,11 @@ export function ChainContextProvider(props) {
             .open(process.env.NEXT_PUBLIC_METAMASK_DEEP_LINK, "_blank")
             .focus();
 
+          alert(
+            "This application will redirect to Metamask, make sure you have it installed"
+          );
+          setConnecting(false);
+
           return;
         }
 
