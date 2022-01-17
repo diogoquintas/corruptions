@@ -43,8 +43,7 @@ function Message({ hash }) {
       const isBase64 =
         BASE_64_REGEX.test(string) &&
         Base64.isValid(string) &&
-        string.length > 0 &&
-        string.length % 2 === 0;
+        string.length > 0;
 
       if (isBase64) {
         const parsed = Base64.decode(string);
@@ -60,9 +59,21 @@ function Message({ hash }) {
           );
         }
 
-        if (hasInvalidCharacters) return string;
+        if (hasInvalidCharacters || parsed.length === 0) return string;
 
-        return <Pre key={index}>{parsed}</Pre>;
+        return (
+          <Pre key={index}>
+            {parsed
+              .split(/(\n)/)
+              .map((item, index) =>
+                item === "\n" ? (
+                  <br key={index} />
+                ) : (
+                  <span key={index}>{item}</span>
+                )
+              )}
+          </Pre>
+        );
       }
 
       return string;
