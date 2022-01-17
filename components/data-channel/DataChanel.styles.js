@@ -97,3 +97,7 @@ export const Select = styled.select`
   top: 2rem;
   background: var(--default-background);
 `;
+
+export const Span = styled.span`
+  text-align: center;
+`;

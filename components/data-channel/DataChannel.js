@@ -14,6 +14,7 @@ import {
   MessageHeading,
   DateInfo,
   Select,
+  Span,
 } from "./DataChanel.styles";
 
 const BASE_64_REGEX = /^[-A-Za-z0-9+/]*={0,3}$/;
@@ -131,10 +132,10 @@ export default function DataChannel() {
             ))}
           </List>
         ) : (
-          <span>[no messages found]</span>
+          <Span>[no messages found]</Span>
         )
       ) : (
-        <span>[connection required to see messages]</span>
+        <Span>[connection required to see messages]</Span>
       )}
     </Section>
   );
