@@ -96,16 +96,18 @@ export default function About() {
         </Tweet>
       </Link>
       <Dl>
-        <dt>What's is corruptions?</dt>
+        <dt>
+          What's <em>corruptions</em>?
+        </dt>
         <dd>
-          At the base level, corruptions is an NFT collection, it can be traded
-          like any other NFT, it has artworks and it has properties. It started
-          with 4196 corruptions, each one having unique visual features. At the
-          moment, some of those corruptions evolved or "deviated" to other
-          forms. Even though some mechanics related to the collection are a
-          breakthrough in the NFT space that does not cover half of what is
-          happening in the project, at the root of it, there's something
-          different.
+          At the base level, <em>corruptions</em> is an NFT collection, it can
+          be traded like any other NFT, it has artworks and it has properties.
+          It started with 4196 corruptions, each one having unique visual
+          features. At the moment, some of those corruptions evolved or
+          "deviated" to other forms. Even though some mechanics related to the
+          collection are a breakthrough in the NFT space that does not cover
+          half of what is happening in the project, at the root of it, there's
+          something different.
         </dd>
         <dt>
           What's different here? What's going on beyond the marketplace
@@ -169,7 +171,7 @@ export default function About() {
           </Link>{" "}
           and started asking questions. From this interaction a narrative was
           born.{" "}
-          <Link href="/data-channel" passHref>
+          <Link href="/messages" passHref>
             <A>Read the messages</A>
           </Link>
           .

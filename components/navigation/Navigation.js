@@ -69,15 +69,15 @@ export default function Navigation() {
               onClick={() => setIsOpen(false)}
               selected={pathname === "/about"}
             >
-              What is Corruption(s*)?
+              About the project
             </A>
           </Link>
-          <Link href="/data-channel" passHref>
+          <Link href="/messages" passHref>
             <A
               onClick={() => setIsOpen(false)}
-              selected={pathname === "/data-channel"}
+              selected={pathname === "/messages"}
             >
-              Data Channel
+              Messages
             </A>
           </Link>
           <Link href="/timeline" passHref>
