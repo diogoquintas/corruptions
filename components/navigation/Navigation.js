@@ -72,6 +72,14 @@ export default function Navigation() {
               About the project
             </A>
           </Link>
+          <Link href="/collection" passHref>
+            <A
+              onClick={() => setIsOpen(false)}
+              selected={pathname === "/collection"}
+            >
+              Collection
+            </A>
+          </Link>
           <Link href="/messages" passHref>
             <A
               onClick={() => setIsOpen(false)}
