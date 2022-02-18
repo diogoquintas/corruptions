@@ -1,90 +1,49 @@
+import detectEthereumProvider from "@metamask/detect-provider";
 import {
   createContext,
   useCallback,
   useContext,
-  useEffect,
   useMemo,
   useState,
 } from "react";
 import Web3 from "web3";
-import dataChannelAbi from "../contracts/dataChannelAbi.json";
 import isMobileBrowser from "./isMobileBrowser";
 
 const ChainContext = createContext();
 
 const CHAIN_ID = process.env.NEXT_PUBLIC_CHAIN_ID;
-const DATA_CHANNEL_ADDRESS = process.env.NEXT_PUBLIC_DATA_CHANNEL_ADDRESS;
-const REFLECTIONS_DATA_CHANNEL_ADDRESS =
-  process.env.NEXT_PUBLIC_REFLECTIONS_DATA_CHANNEL_ADDRESS;
-const DATA_CHANNEL_DEPLOY_BLOCK = 13615636;
-const REFLECTIONS_DATA_CHANNEL_DEPLOY_BLOCK = 13623404;
 
 export function ChainContextProvider(props) {
   const [provider, setProvider] = useState();
   const [account, setAccount] = useState();
-  const [dataChannel, setDataChannel] = useState();
-  const [reflectionsDataChannel, setReflectionsDataChannel] = useState();
   const [connecting, setConnecting] = useState(false);
-  const [messages, setMessages] = useState([]);
-  const [sortAsc, setSortAsc] = useState(false);
 
-  const connected =
-    !!provider && !!account && !!dataChannel && !!reflectionsDataChannel;
+  const connected = !!provider && !!account;
 
-  useEffect(() => {
-    if (!connected) return;
+  const setupProvider = useCallback(async () => {
+    const provider = await detectEthereumProvider();
+    const web3Provider = new Web3(provider);
 
-    dataChannel.events
-      .Message({ fromBlock: DATA_CHANNEL_DEPLOY_BLOCK })
-      .on("data", (event) => {
-        setMessages((messages) => [
+    setProvider(web3Provider);
+
+    const isCorrectNetwork = window.ethereum.networkVersion === CHAIN_ID;
+
+    if (!isCorrectNetwork) {
+      await window.ethereum.request({
+        method: "wallet_switchEthereumChain",
+        params: [
           {
-            blockNumber: event.blockNumber,
-            hash: event.transactionHash,
-            from: "CorruptionsDataChannel",
+            chainId: web3Provider.utils.toHex(CHAIN_ID),
           },
-          ...messages,
-        ]);
+        ],
       });
+    }
 
-    reflectionsDataChannel.events
-      .Message({ fromBlock: REFLECTIONS_DATA_CHANNEL_DEPLOY_BLOCK })
-      .on("data", (event) => {
-        setMessages((messages) => [
-          {
-            blockNumber: event.blockNumber,
-            hash: event.transactionHash,
-            from: "ReflectionsDataChannel",
-          },
-          ...messages,
-        ]);
-      });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [connected]);
+    return web3Provider;
+  }, []);
 
-  const handleEthereum = useCallback(async () => {
+  const initializeAccount = useCallback(async (web3Provider) => {
     try {
-      const provider = window.ethereum;
-
-      await provider.enable();
-
-      const web3Provider = new Web3(provider);
-
-      setProvider(web3Provider);
-
-      const isCorrectNetwork = window.ethereum.networkVersion === CHAIN_ID;
-
-      if (!isCorrectNetwork) {
-        await window.ethereum.request({
-          method: "wallet_switchEthereumChain",
-          params: [
-            {
-              chainId: web3Provider.utils.toHex(CHAIN_ID),
-            },
-          ],
-        });
-      }
-
       const accounts = await window.ethereum.request({
         method: "eth_requestAccounts",
         params: [
@@ -95,27 +54,33 @@ export function ChainContextProvider(props) {
       });
 
       setAccount(accounts[0]);
+    } catch (err) {
+      alert("Please check your metamask");
+      console.log("Error requesting accounts: ", err);
+    }
 
-      const dataChannel = await new web3Provider.eth.Contract(
-        dataChannelAbi,
-        DATA_CHANNEL_ADDRESS
-      );
+    window.ethereum.on("accountsChanged", (accounts) => {
+      if (accounts.length === 0) {
+        alert("Error getting your account, please install metamask");
+        console.log("Error on `accountsChanged`");
+      } else {
+        setAccount(accounts[0]);
+      }
+    });
+  }, []);
 
-      setDataChannel(dataChannel);
+  const handleEthereum = useCallback(async () => {
+    try {
+      const web3Provider = await setupProvider();
 
-      const reflectionsDataChannel = await new web3Provider.eth.Contract(
-        dataChannelAbi,
-        REFLECTIONS_DATA_CHANNEL_ADDRESS
-      );
-
-      setReflectionsDataChannel(reflectionsDataChannel);
+      await initializeAccount(web3Provider);
     } catch (err) {
       alert(
-        "It was not possible to connect to your wallet, check if you have metamask installed"
+        "Error connecting to the chain, make sure you have Metamask installed"
       );
       console.log("Error details", err);
     }
-  }, []);
+  }, [initializeAccount, setupProvider]);
 
   const connect = useCallback(async () => {
     setConnecting(true);
@@ -166,31 +131,10 @@ export function ChainContextProvider(props) {
     }
   }, [handleEthereum]);
 
-  const setMessage = useCallback(
-    ({ hash, message, timestamp }) =>
-      setMessages((messages) =>
-        messages.map((item) =>
-          item.hash === hash ? { ...item, message, timestamp } : item
-        )
-      ),
-    []
-  );
-
   const reset = useCallback(() => {
     setProvider(undefined);
     setAccount(undefined);
-    setDataChannel(undefined);
   }, []);
-
-  const sortedMessages = useMemo(
-    () =>
-      messages.sort((a, b) =>
-        sortAsc ? a.blockNumber - b.blockNumber : b.blockNumber - a.blockNumber
-      ),
-    [messages, sortAsc]
-  );
-
-  const toggleSort = useCallback(() => setSortAsc((sort) => !sort), []);
 
   const context = useMemo(
     () => ({
@@ -198,22 +142,9 @@ export function ChainContextProvider(props) {
       account,
       connected,
       connecting,
-      messages: sortedMessages,
-      sortAsc,
-      actions: { connect, reset, setMessage, toggleSort },
+      actions: { connect, reset },
     }),
-    [
-      account,
-      connect,
-      connecting,
-      provider,
-      reset,
-      sortedMessages,
-      connected,
-      setMessage,
-      toggleSort,
-      sortAsc,
-    ]
+    [account, connect, connected, connecting, provider, reset]
   );
 
   return <ChainContext.Provider value={context} {...props} />;

@@ -3,6 +3,7 @@ import { useMemo, useRef, useState } from "react";
 import useChainData from "../../hooks/useChainData";
 import useIntersectionObserver from "../../hooks/useIntersectionObserver";
 import useMessage from "../../hooks/useMessage";
+import useMessages from "../../hooks/useMessages";
 import {
   Section,
   MessageBlock,
@@ -23,6 +24,7 @@ function Message({ hash }) {
   const elementRef = useRef();
   const [isVisible, setIsVisible] = useState(false);
   const { from, message, timestamp } = useMessage({ hash, load: isVisible });
+  const { connected } = useChainData();
 
   useIntersectionObserver({
     target: elementRef,
@@ -96,26 +98,30 @@ function Message({ hash }) {
         )}
       </MessageHeading>
       <MessageContent hasMessage={!!parsedMessage} ref={elementRef}>
-        {parsedMessage ?? "[this message is being loaded]"}
+        {parsedMessage ??
+          `[this message is being loaded${
+            connected ? "" : " - a connection is required"
+          }]`}
       </MessageContent>
     </MessageBlock>
   );
 }
 
 export default function DataChannel() {
+  const { connected } = useChainData();
+
   const {
-    connected,
     messages,
     sortAsc,
     actions: { toggleSort },
-  } = useChainData();
+  } = useMessages();
 
   const sort = sortAsc ? "oldest" : "newest";
 
   return (
     <Section>
       <h3>Messages</h3>
-      {connected && messages.length > 0 && (
+      {messages.length > 0 && (
         <Select
           value={sort}
           onChange={(evt) => evt.target.value !== sort && toggleSort()}
@@ -124,18 +130,17 @@ export default function DataChannel() {
           <option value="oldest">Oldest</option>
         </Select>
       )}
-      {connected ? (
-        messages.length > 0 ? (
-          <List>
-            {messages.map(({ hash, from }) => (
-              <Message key={hash} hash={hash} />
-            ))}
-          </List>
-        ) : (
-          <Span>[no messages found]</Span>
-        )
+      {messages.length > 0 ? (
+        <List>
+          {messages.map(({ hash }) => (
+            <Message key={hash} hash={hash} />
+          ))}
+        </List>
       ) : (
-        <Span>[connection required to see messages]</Span>
+        <Span>
+          [no messages found
+          {`${connected ? "" : " - a connection is required"}`}]
+        </Span>
       )}
     </Section>
   );

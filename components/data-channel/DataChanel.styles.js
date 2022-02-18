@@ -23,6 +23,7 @@ export const MessageContent = styled.div`
 
 export const From = styled.span`
   font-size: 0.8rem;
+  white-space: nowrap;
 `;
 
 export const List = styled.ul`
@@ -81,6 +82,7 @@ export const DateInfo = styled.a`
   text-decoration: underline;
   cursor: pointer;
   color: currentColor;
+  text-align: end;
 
   &:hover {
     filter: brightness(1.8);

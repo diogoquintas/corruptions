@@ -19,6 +19,10 @@ const Button = styled.button`
     cursor: not-allowed;
     color: var(--main-green);
   }
+
+  &:disabled {
+    font-size: 0.8rem;
+  }
 `;
 
 const LogoutButton = styled.button`
@@ -37,8 +41,6 @@ const LogoutButton = styled.button`
 export default function Connecter() {
   const {
     account,
-    provider,
-    dataChannel,
     connected,
     connecting,
     actions: { connect, reset },
@@ -57,7 +59,7 @@ export default function Connecter() {
         )}`}</LogoutButton>
       ) : (
         <Button onClick={connect} disabled={connecting}>
-          {connecting ? "connecting" : "connect"}
+          {connecting ? "connecting (check your metamask)" : "connect"}
         </Button>
       )}
     </Wrapper>

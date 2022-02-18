@@ -23,7 +23,7 @@ export default function ContractList() {
       <Ul>
         <ContractItem
           title="Corruptions"
-          address="0x5BDf397bB2912859Dbd8011F320a222f79A28d2E"
+          address={process.env.NEXT_PUBLIC_CORRUPTIONS_ADDRESS}
           description="The main contract which contains the ERC-721 interface."
         />
         <ContractItem

@@ -1,13 +1,13 @@
 import { useEffect, useMemo, useState } from "react";
 import useChainData from "./useChainData";
+import useMessages from "./useMessages";
 
 export default function useMessage({ hash, load = false }) {
+  const { provider, connected } = useChainData();
   const {
-    provider,
-    connected,
     messages,
     actions: { setMessage },
-  } = useChainData();
+  } = useMessages();
 
   const messageItem = useMemo(
     () => messages?.find((item) => item.hash === hash) ?? {},

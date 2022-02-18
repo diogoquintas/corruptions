@@ -6,6 +6,8 @@ import styled from "@emotion/styled";
 import Connecter from "../components/connecter/Connecter";
 import { ChainContextProvider } from "../hooks/useChainData";
 import BackToTop from "../components/back-to-top/BackToTop";
+import { MessagesContextProvider } from "../hooks/useMessages";
+import { CollectionContextProvider } from "../hooks/useCollection";
 
 const Wrapper = styled.div`
   display: flex;
@@ -50,14 +52,18 @@ function MyApp({ Component, pageProps }) {
         <meta name="theme-color" content="#ffffff"></meta>
       </Head>
       <ChainContextProvider>
-        <Wrapper>
-          <Navigation />
-          <Main>
-            <Component {...pageProps} />
-          </Main>
-          <Connecter />
-        </Wrapper>
-        <BackToTop />
+        <MessagesContextProvider>
+          <CollectionContextProvider>
+            <Wrapper>
+              <Navigation />
+              <Main>
+                <Component {...pageProps} />
+              </Main>
+              <Connecter />
+            </Wrapper>
+            <BackToTop />
+          </CollectionContextProvider>
+        </MessagesContextProvider>
       </ChainContextProvider>
     </div>
   );
